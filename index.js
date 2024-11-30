@@ -46,11 +46,13 @@ app.get('/calculate-tax', (req, res) => {
 app.get('/estimate-delivery', (req, res) => {
   let shippingMethod = req.query.shippingMethod;
   let distance = parseFloat(req.query.distance);
-  
-  if (shippingMethod = express) {
+ 
+  if (shippingMethod.toLowerCase() === 'standard') {
+    res.send((distance / 50).toString());
+  } else if(shippingMethod.toLowerCase() === 'express') {
     res.send((distance / 100).toString());
   } else {
-    res.send((distance / 50).toString());
+    res.send('none');
   }
 });
 
@@ -73,16 +75,6 @@ app.get('/loyalty-points', (req, res) => {
   let loyaltyPoints = (purchaseAmount * 2);
   res.send(loyaltyPoints.toString());  
 });
-
-
-
-
-
-
-
-
-
-
 
 
 
